@@ -98,11 +98,26 @@ Working with Documentation
 
 #### What will you learn
 
-1. Work with swagger
+Work with swagger
 
 ### Tasks
 
-1. Integrated swagger in the data project.
+Integrated swagger in the data project.
+
+### Milestone 5
+
+[Work with COPY Postgresql](https://www.postgresql.org/docs/current/sql-copy.html#:~:text=COPY%20moves%20data%20between%20PostgreSQL,results%20of%20a%20SELECT%20query.)
+
+### Tasks
+
+Add a `POST /loading/products` endpoint which will get the address where the products file is located. The address to the file can be a local one or an external server via the HTTP protocol. A sample file in resources/products.txt
+
+### Milestone 6
+
+[Work with testContainers](https://www.testcontainers.org/)
+
+### Tasks
+Create integration tests for each endpoint created using testcontainers.
 
 ## Congratulations!
 
