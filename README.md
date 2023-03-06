@@ -110,7 +110,7 @@ Integrated swagger in the data project.
 
 ### Tasks
 
-Add a `POST /loading/products` endpoint which will get the address where the products file is located. The address to the file can be a local one or an external server via the HTTP protocol. A sample file in resources/products.txt
+Add a `POST /loading/products` endpoint which will get the address where the products file is located. The address to the file can be a local one or an external server via the HTTP protocol. A sample file in resources/products.csv. All these products must be assigned to the admin user, in case he is not in the base then create the admin user and then add these products to him.
 
 ### Milestone 6
 
