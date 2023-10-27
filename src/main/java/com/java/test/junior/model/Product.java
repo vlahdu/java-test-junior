@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 /**
@@ -16,11 +17,15 @@ import java.time.LocalDateTime;
  * @version java-test-junior
  * @apiNote 08.12.2022
  */
+@Entity
+@Table(name = "product")
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 public class Product {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private Double price;
