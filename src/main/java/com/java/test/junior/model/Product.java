@@ -18,7 +18,6 @@ import java.time.LocalDateTime;
  * @apiNote 08.12.2022
  */
 @Entity
-@Table(name = "product")
 @Getter
 @Setter
 @ToString

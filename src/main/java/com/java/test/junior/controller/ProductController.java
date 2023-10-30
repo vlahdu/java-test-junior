@@ -16,13 +16,13 @@ import org.springframework.web.bind.annotation.*;
  * @version java-test-junior
  * @apiNote 08.12.2022
  */
-@RequestMapping("/product/{id}")
+@RequestMapping
 @RestController
 @RequiredArgsConstructor
 public class ProductController {
     private final ProductService productService;
 
-    @PostMapping("/product")
+    @PostMapping("/products")
     @ResponseStatus(HttpStatus.CREATED)
     public Product createProduct(@RequestBody ProductDTO productDTO) {
         return productService.createProduct(productDTO);
