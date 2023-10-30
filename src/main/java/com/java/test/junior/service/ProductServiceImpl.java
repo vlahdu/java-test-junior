@@ -10,6 +10,7 @@ import com.java.test.junior.repo.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 /**
  * @author dumitru.beselea
@@ -39,5 +40,40 @@ public class ProductServiceImpl implements ProductService {
         product.setUserId(1L);
 
         return productRepository.save(product);
+    }
+
+    @Override
+    public Product getProduct(Long id) {
+        return productRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public Product updateProduct(Long id, Product updatedProduct) {
+        Optional<Product> existingProductOptional = productRepository.findById(id);
+
+        if (existingProductOptional.isPresent())
+        {
+            Product existingProduct = existingProductOptional.get();
+
+            existingProduct.setPrice(updatedProduct.getPrice());
+            existingProduct.setUpdatedAt(LocalDateTime.now());
+            existingProduct.setUserId(updatedProduct.getUserId());
+
+            return productRepository.save(existingProduct);
+        }
+        else
+            return null;
+    }
+
+
+    @Override
+    public void deleteProduct(Long id) {
+        Optional<Product> productOptional = productRepository.findById(id);
+
+        if (productOptional.isPresent())
+        {
+            Product product = productOptional.get();
+            productRepository.delete(product);
+        }
     }
 }

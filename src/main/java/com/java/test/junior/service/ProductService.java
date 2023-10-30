@@ -18,4 +18,10 @@ public interface ProductService {
      * @return the product created from the database
      */
     Product createProduct(ProductDTO productDTO);
+
+    Product getProduct(Long id);
+
+    Product updateProduct(Long id, Product productDTO);
+
+    void deleteProduct(Long id);
 }

@@ -2,14 +2,12 @@ package com.java.test.junior;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
 
-@SpringBootApplication(scanBasePackages = "com.java.test.junior")
+@SpringBootApplication
 public class MarketplaceApplication {
     public static void main(String[] args) {
         // initializare context Spring app
-        ApplicationContext context = SpringApplication.run(MarketplaceApplication.class, args);
-        System.out.println("HI");
+        SpringApplication.run(MarketplaceApplication.class, args);
     }
 }
 
