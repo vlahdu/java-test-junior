@@ -6,6 +6,8 @@ package com.java.test.junior.service;
 
 import com.java.test.junior.model.Product;
 import com.java.test.junior.model.ProductDTO;
+import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 
 /**
  * @author dumitru.beselea
@@ -17,11 +19,13 @@ public interface ProductService {
      * @param productDTO this product to be created
      * @return the product created from the database
      */
-    Product createProduct(ProductDTO productDTO);
+    ResponseEntity<Product> createProduct(ProductDTO productDTO);
 
-    Product getProduct(Long id);
+    ResponseEntity<Product> getProduct(Long id);
 
-    Product updateProduct(Long id, Product productDTO);
+    ResponseEntity<Product> updateProduct(Long id, Product productDTO);
 
-    void deleteProduct(Long id);
+    ResponseEntity<Product> deleteProduct(Long id);
+
+    ResponseEntity<Page<Product>> getProductsPaginated(int page, int pageSize);
 }
