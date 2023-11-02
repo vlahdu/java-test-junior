@@ -99,9 +99,10 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ResponseEntity<Page<Product>> getProductsPaginated(int page, int pageSize) {
-        PageRequest pageable = PageRequest.of(page, pageSize);
-        Page<Product> allProducts = productRepository.findAll(pageable);
+    public ResponseEntity<Page<Product>> getProductsPaginated(int page, int page_size) {
+        PageRequest pageRequest = PageRequest.of(page, page_size);
+        Page<Product> allProducts = productRepository.findAll(pageRequest);
+        allProducts.getSort();
 
         if (allProducts.isEmpty())
             return ResponseEntity.noContent().build();

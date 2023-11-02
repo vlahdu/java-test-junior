@@ -27,5 +27,5 @@ public interface ProductService {
 
     ResponseEntity<Product> deleteProduct(Long id);
 
-    ResponseEntity<Page<Product>> getProductsPaginated(int page, int pageSize);
+    ResponseEntity<Page<Product>> getProductsPaginated(int page, int page_size);
 }

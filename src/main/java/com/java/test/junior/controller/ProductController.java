@@ -12,6 +12,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 /**
  * @author dumitru.beselea
  * @version java-test-junior
@@ -24,17 +26,17 @@ public class ProductController {
     private final ProductService productService;
 
     @PostMapping
-    public ResponseEntity<Product> createProduct(@RequestBody ProductDTO productDTO) {
+    public ResponseEntity<Product> createProduct(@Valid @RequestBody ProductDTO productDTO) {
         return productService.createProduct(productDTO);
     }
 
     @GetMapping("/{id}")
-    public  ResponseEntity<Product> getProduct(@PathVariable Long id) {
+    public  ResponseEntity<Product> getProduct( @PathVariable Long id) {
         return productService.getProduct(id);
     }
 
     @PutMapping("/{id}")
-    public  ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody Product updatedProduct) {
+    public  ResponseEntity<Product> updateProduct(@PathVariable Long id, @Valid @RequestBody Product updatedProduct) {
         return productService.updateProduct(id, updatedProduct);
     }
 
@@ -44,7 +46,7 @@ public class ProductController {
     }
 
     @GetMapping
-    public  ResponseEntity<Page<Product>> getProductsPaginated(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int pageSize) {
-        return productService.getProductsPaginated(page, pageSize);
+    public  ResponseEntity<Page<Product>> getProductsPaginated(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int page_size) {
+        return productService.getProductsPaginated(page - 1, page_size);
     }
 }

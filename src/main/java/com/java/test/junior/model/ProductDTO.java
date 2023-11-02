@@ -4,8 +4,12 @@
 
 package com.java.test.junior.model;
 
+import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotBlank;
 
 /**
  * @author dumitru.beselea
@@ -15,7 +19,13 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ProductDTO {
+    @NotBlank
     private String name;
+
+    @NotNull
+    @DecimalMin("0.01")
     private Double price;
+
+    @NotBlank
     private String description;
 }
