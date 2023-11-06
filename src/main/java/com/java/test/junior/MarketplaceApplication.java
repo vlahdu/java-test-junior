@@ -10,19 +10,3 @@ public class MarketplaceApplication {
         SpringApplication.run(MarketplaceApplication.class, args);
     }
 }
-
-// preluarea bean ProductService din context
-/* ProductService productService = context.getBean(ProductService.class);
-
-        ProductDTO productDTO = new ProductDTO();
-        productDTO.setName("Test Product");
-        productDTO.setPrice(19.99);
-        productDTO.setDescription("This is a test product");
-
-        Product createdProduct = productService.createProduct(productDTO);
-
-        System.out.println("Created Product:");
-        System.out.println("ID: " + createdProduct.getId());
-        System.out.println("Name: " + createdProduct.getName());
-        System.out.println("Price: " + createdProduct.getPrice());
-        System.out.println("Description: " + createdProduct.getDescription());*/

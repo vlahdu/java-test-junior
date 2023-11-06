@@ -4,12 +4,13 @@
 
 package com.java.test.junior.model;
 
-import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 
 /**
  * @author dumitru.beselea
@@ -19,13 +20,14 @@ import javax.validation.constraints.NotBlank;
 @Getter
 @Setter
 public class ProductDTO {
-    @NotBlank
+    @NotBlank(message = "Name is required")
     private String name;
 
-    @NotNull
+    @NotNull(message = "Price is required")
+    @Positive(message = "Price must be a positive value")
     @DecimalMin("0.01")
     private Double price;
 
-    @NotBlank
+    @NotBlank(message = "Description is required")
     private String description;
 }

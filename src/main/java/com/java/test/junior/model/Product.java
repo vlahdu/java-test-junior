@@ -13,6 +13,7 @@ import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.time.LocalDateTime;
 
 /**
@@ -31,17 +32,17 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
     private String name;
 
-    @NotNull
+    @NotNull(message = "Price is required")
+    @Positive(message = "Price must be a positive value")
     @DecimalMin("0.01")
     private Double price;
 
-    @NotBlank
+    @NotBlank(message = "Description is required")
     private String description;
 
-    @NotNull
+    @NotNull(message = "User ID is required")
     private Long userId;
 
     private LocalDateTime createdAt;

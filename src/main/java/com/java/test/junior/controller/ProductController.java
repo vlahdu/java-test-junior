@@ -10,9 +10,11 @@ import com.java.test.junior.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 
 /**
  * @author dumitru.beselea
@@ -21,6 +23,7 @@ import javax.validation.Valid;
  */
 @RequestMapping("/products")
 @RestController
+@Validated
 @RequiredArgsConstructor
 public class ProductController {
     private final ProductService productService;
@@ -31,12 +34,12 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public  ResponseEntity<Product> getProduct( @PathVariable Long id) {
+    public  ResponseEntity<Product> getProduct(@PathVariable @Min(1) Long id) {
         return productService.getProduct(id);
     }
 
     @PutMapping("/{id}")
-    public  ResponseEntity<Product> updateProduct(@PathVariable Long id, @Valid @RequestBody Product updatedProduct) {
+    public  ResponseEntity<Product> updateProduct(@PathVariable @Min(1) Long id, @Valid @RequestBody Product updatedProduct) {
         return productService.updateProduct(id, updatedProduct);
     }
 
@@ -46,7 +49,7 @@ public class ProductController {
     }
 
     @GetMapping
-    public  ResponseEntity<Page<Product>> getProductsPaginated(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int page_size) {
+    public  ResponseEntity<Page<Product>> getProductsPaginated(@RequestParam(defaultValue = "1") @Min(1) int page, @RequestParam(defaultValue = "10") @Min(1) int page_size) {
         return productService.getProductsPaginated(page - 1, page_size);
     }
 }

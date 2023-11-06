@@ -12,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -37,8 +38,9 @@ public class ProductServiceImpl implements ProductService {
     public ResponseEntity<Product> createProduct(ProductDTO productDTO) {
         Product existingProduct = productRepository.findByName(productDTO.getName());
 
-        if (existingProduct != null)
-            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        if (existingProduct != null) {
+            throw new HttpClientErrorException(HttpStatus.CONFLICT, "There can't be products with the same name");
+        }
         else {
             Product product = new Product();
             product.setName(productDTO.getName());
@@ -62,7 +64,7 @@ public class ProductServiceImpl implements ProductService {
 
             return ResponseEntity.ok(product);
         }
-        return ResponseEntity.notFound().build();
+        throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "No such product found");
     }
 
     @Override
@@ -81,7 +83,7 @@ public class ProductServiceImpl implements ProductService {
 
             return ResponseEntity.ok(existingProduct);
         }
-        return ResponseEntity.notFound().build();
+        throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "No such product found");
     }
 
     @Override
@@ -95,17 +97,16 @@ public class ProductServiceImpl implements ProductService {
 
             return ResponseEntity.noContent().build();
         }
-        return ResponseEntity.notFound().build();
+        throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "No such product found");
     }
 
     @Override
     public ResponseEntity<Page<Product>> getProductsPaginated(int page, int page_size) {
         PageRequest pageRequest = PageRequest.of(page, page_size);
         Page<Product> allProducts = productRepository.findAll(pageRequest);
-        allProducts.getSort();
 
         if (allProducts.isEmpty())
-            return ResponseEntity.noContent().build();
+            throw new HttpClientErrorException(HttpStatus.NO_CONTENT, "There are no products found");
         return ResponseEntity.ok(allProducts);
     }
 }
